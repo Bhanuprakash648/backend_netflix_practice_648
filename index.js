@@ -6,7 +6,9 @@ import booksRoute from './routes/booksRoute.js';
 import cors from 'cors';
 const app=express(); 
 app.use(express.json());
-
+app.listen(PORT,()=>{
+        console.log(`APP is listening to port: ${PORT}`); 
+});
 app.use(cors({
     origin: 'http://localhost:5173',
     methods: ['GET','POST','PUT','DELETE','PATCH'],
@@ -21,9 +23,6 @@ app.get('/',(request ,response) => {
 app.use('/books',booksRoute);
 mongoose.connect(mongoDBURL).then(()=>{
     console.log("app connected to database");
-    app.listen(PORT,()=>{
-        console.log(`APP is listening to port: ${PORT}`); 
-    });
 }).catch((error)=>{
     console.log(error);
 });
